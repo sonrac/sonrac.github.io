@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: gulpfile.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: gulpfile.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Donii Sergii &lt;doniysa@gmail.com>
+ */
+
+/**
+ * @const {Function} series Gulp task series. See &lt;a href="https://github.com/iameugenejo/gulps">Documentation&lt;/a> for detail
+ * @const {Object} connect Connect
+ * @const {CopyFiles} copyFiles Copy files class
+ * @const {Templates} templates Templates build class
+ * @const {Object} _config Template config
+ */
+const series          = require('gulp-series'),
+      connect         = require('gulp-connect'),
+      open            = require('open'),
+      _               = require('lodash'),
+      os              = require('os'),
+      fs              = require('fs'),
+      backgrounder    = require("backgrounder"),
+      exec            = require('child_process').exec,
+      copyFiles       = require('./helpers/CopyFiles'),
+      templates       = require("./helpers/Templates"),
+      _config         = require("./config.js"),
+      buildConfigPath = (config) => {
+          let conf = {};
+
+          if (config.outDir) {
+              conf.outDir = config.outDir;
+          }
+          if (config.distDir) {
+              conf.distDir = config.distDir;
+          }
+
+          return conf;
+      },
+      copyTask        = (paths, move) => {
+          move = move || false;
+
+          if (_.isUndefined(paths)) {
+              return;
+          }
+
+          let copy = new copyFiles(paths);
+          copy.process(move);
+      },
+      css             = require("./helpers/Css"),
+      images          = require("./helpers/Images"),
+      mJS             = require("./helpers/JS");
+
+series.registerTasks({
+    "server"     : () => {
+        let fd;
+        fd       = fs.openSync(__dirname + '/.pids', 'r');
+        let pids = fs.readFileSync(__dirname + '/.pids');
+
+        if (pids = pids.toString()) {
+            pids = pids.toString();
+            pids.split(os.EOL).forEach((pid) => {
+                exec('kill ' + _.trim(pid));
+            });
+        }
+        fd      = fs.openSync(__dirname + '/.pids', 'w');
+        let pid = exec('node ' + __dirname + '/helpers/Server.js > /dev/null 2>/dev/null &amp; echo $!');
+        fs.appendFileSync(fd, pid.pid + os.EOL);
+
+    },
+    "minify-css" : () => {
+        let opt = module.exports.config;
+
+        if (!opt.css) {
+            return;
+        }
+
+        opt.css = _.isArray(opt.css) ? opt.css : [opt.css];
+
+        opt.css.forEach((next) => {
+            let _css = new css(next, opt.liveReloadOptions, buildConfigPath(opt));
+            _css.minify();
+        });
+    },
+    "build-css"  : () => {
+        let opt = module.exports.config;
+
+        if (!opt.css) {
+            return;
+        }
+
+        opt.css = _.isArray(opt.css) ? opt.css : [opt.css];
+
+        opt.css.forEach((next) => {
+            let _css = new css(next, opt.liveReloadOptions, buildConfigPath(opt));
+            _css.build();
+        });
+    },
+    "minify-js"  : () => {
+        let opt = module.exports.config;
+
+        if (!opt.js) {
+            return;
+        }
+
+        opt.js = _.isArray(opt.js) ? opt.js : [opt.js];
+
+        opt.js.forEach((next) => {
+            let js = new mJS(next, opt.liveReloadOptions, buildConfigPath(opt));
+            js.minify()
+        });
+
+    },
+    "build-js"   : () => {
+        let opt = module.exports.config;
+
+        if (!opt.js) {
+            return;
+        }
+
+        opt.js = _.isArray(opt.js) ? opt.js : [opt.js];
+
+        opt.js.forEach((next) => {
+            let js = new mJS(next, opt.liveReloadOptions, buildConfigPath(opt));
+
+            js.build();
+        });
+    },
+    "imagemin"   : () => {
+        let opt = module.exports.config;
+
+        if (!opt.images) {
+            return;
+        }
+
+        opt.images = _.isArray(opt.images) ? opt.images : [opt.images];
+
+        opt.images.forEach((next) => {
+            let imagemin = new images(next, opt.liveReloadOptions, buildConfigPath(opt));
+            imagemin.minify();
+        });
+    },
+    "ts"         : () => {
+        let opt = module.exports.config;
+
+        if (!opt.ts) {
+            return;
+        }
+
+        opt.ts = _.isArray(opt.js) ? opt.ts : [opt.ts];
+
+        opt.ts.forEach((next) => {
+            next.processor = 'gulp-typescript-babel';
+            let ts         = new mJS(next, opt.liveReloadOptions, buildConfigPath(opt));
+            ts.build();
+        });
+
+    },
+    "templates"  : () => {
+        let opt = module.exports.config;
+
+        if (!opt.templates) {
+            return;
+        }
+
+        opt.templates = _.isArray(opt.templates) ? opt.templates : [opt.templates];
+
+        opt.templates.forEach((next) => {
+            let template = new templates(next, opt.liveReloadOptions, buildConfigPath(opt));
+            template.build();
+        });
+    },
+    "minify-html": () => {
+        let opt = module.exports.config;
+
+        if (!opt.templates) {
+            return;
+        }
+
+        opt.templates = _.isArray(opt.templates) ? opt.templates : [opt.templates];
+
+        opt.templates.forEach((next) => {
+            if (!next.enableMin) {
+                return;
+            }
+            let template = new templates(next, opt.liveReloadOptions, buildConfigPath(opt));
+            template.minify();
+        });
+    },
+    "coffee"     : () => {
+        let opt = module.exports.config;
+
+        if (!opt.coffee) {
+            return;
+        }
+
+        opt.coffee = _.isArray(opt.js) ? opt.ts : [opt.ts];
+
+        opt.coffee.forEach((next) => {
+            next.processor = 'gulp-coffee';
+            let coffee     = new mJS(next, opt.liveReloadOptions, buildConfigPath(opt));
+            coffee.build();
+        });
+    },
+    "copy"       : () => {
+        let opt = module.exports.config;
+
+        if (!opt.copyFiles) {
+            return;
+        }
+
+        copyTask(opt.copyFiles, false);
+    },
+    "move"       : () => {
+        let opt = module.exports.config;
+        if (!opt.moveFiles) {
+            return;
+        }
+        copyTask(opt.moveFiles, true);
+    },
+    "watch"      : () => {
+        let opt = module.exports.config;
+    },
+    "release"    : (() => {
+        gulp.src([_config.build_dir + '/**/**/**/**/**/**/**/**/**/**/*'])
+            .pipe(zip('release.zip'))
+            .pipe(gulp.dest('.'));
+    }),
+    "amd-build"  : () => {
+
+    },
+    "concat"     : () => {
+
+    }
+});
+
+series.registerSeries('minify-css', ['build-css', 'minify-css']);
+series.registerSeries('watch', ['watch']);
+series.registerSeries('images-move', ['imagemin', 'move']);
+series.registerSeries('templates-move', ['templates', 'minify-html', 'move']);
+series.registerSeries('minify-css-move', ['minify-css', 'move']);
+series.registerSeries('minify-js-move', ['minify-js', 'move']);
+series.registerSeries('build', ['build-css', 'build-js', 'server', 'templates', 'minify-css', 'minify-js', 'minify-html', 'imagemin', 'copy', 'move']);
+series.registerSeries('default', ['watch', 'build-css', 'build-js', 'templates', 'minify-css', 'minify-js', 'minify-html', 'imagemin', 'copy', 'move', 'server']);
+
+if (_.size(_config.additionalTasks)) {
+    series.registerTasks(_config.additionalTasks);
+}
+
+if (_.size(_config.additionalSeries)) {
+    _.each(_config.additionalSeries, (list, name) => {
+        series.registerSeries(name, _.isArray(list) ? list : [list]);
+    });
+}
+
+module.exports = {
+    series: series,
+    config: _config
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BaseBuild.html">BaseBuild</a></li><li><a href="Concat.html">Concat</a></li><li><a href="CopyFiles.html">CopyFiles</a></li><li><a href="Css.html">Css</a></li><li><a href="Images.html">Images</a></li><li><a href="JS.html">JS</a></li><li><a href="PathBuild.html">PathBuild</a></li><li><a href="PrepareOptions.html">PrepareOptions</a></li><li><a href="Server.html">Server</a></li><li><a href="Templates.html">Templates</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_">_</a></li><li><a href="global.html#_config">_config</a></li><li><a href="global.html#baseBuild">baseBuild</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#gulp">gulp</a></li><li><a href="global.html#pathBuild">pathBuild</a></li><li><a href="global.html#pathConfig">pathConfig</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Jun 21 2017 10:08:58 GMT+0300 (EEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

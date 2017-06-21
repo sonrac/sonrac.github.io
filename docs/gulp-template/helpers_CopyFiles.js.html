@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: helpers/CopyFiles.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: helpers/CopyFiles.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Donii Sergii &lt;doniysa@gmail.com>
+ */
+
+const _         = require('lodash'),
+      gulp      = require('gulp'),
+      watch     = gulp.watch,
+      PathBuild = require("./PathBuild"),
+      Rsync     = require('rsync');
+
+/**
+ * @class {CopyFiles}
+ *
+ * Copy files helper. Usages in copy &amp; moving tasks
+ *
+ * @property {Array|Object} paths Paths config
+ *
+ * @author Donii Sergii&lt;doniysa@gmail.com>
+ */
+class CopyFiles {
+    /**
+     * CopyFiles constructor
+     *
+     * @param {Object} config Config
+     * @param {String} defaultOut Default destination dir
+     *
+     * @author Donii Sergii&lt;doniysa@gmail.com>
+     */
+    constructor(config, defaultOut) {
+        this.paths = [];
+
+        this.rsyncOptions = config.rsyncOptions;
+        this.tasks        = config.tasks || 'copy';
+
+        if (!_.isArray(this.tasks)) {
+            this.tasks = [this.tasks];
+        }
+
+        if (!_.isArray(config.paths)) {
+            config.paths = [paths];
+        }
+
+        let _self = this;
+
+        _.each(config.paths, function (path, index) {
+            let curPath = _.isString(index) ? index : defaultOut,
+                _paths  = _.isArray(path) ? path : (_.isString(path) || (_.isObject(path) ? [path] : undefined));
+
+            if (!_paths) {
+                return;
+            }
+
+            _paths.forEach(function (path, index) {
+                let nextPath = {};
+
+                if (!curPath &amp;&amp; !path.src) {
+                    return;
+                }
+
+                nextPath.dest = _.isObject(path) ? path.dest : path;
+                nextPath.src  = curPath || path.src;
+
+                _self.paths.push(nextPath);
+            });
+        });
+    }
+
+    /**
+     * Get options for rsync
+     *
+     * @returns {Object}
+     *
+     * @author Donii Sergii&lt;doniysa@gmail.com>
+     */
+    getRsyncOptions(dest, src) {
+        let _rsync = new Rsync();
+
+        if (_.isFunction(this.rsyncOptions)) {
+            return this.rsyncOptions.call(this, [_rsync, dest, src]);
+        }
+
+        return _rsync;
+    }
+
+    /**
+     * Build rsync command
+     *
+     * @param {String} dest Destination folder
+     * @param {String} src Source folder
+     * @returns {Rsync}
+     *
+     * @author Donii Sergii&lt;doniysa@gmail.com>
+     */
+    rsyncBuild(dest, src) {
+        return this.getRsyncOptions()
+            .exclude('.*')
+            .source(src)
+            .destination(dest);
+    }
+
+    /**
+     * Sync directories
+     *
+     * @param {Boolean} moved If true - delete source file after sync
+     * @param {Object} rOptions rsync options
+     * @param {String} countTry Current try sync count
+     *
+     * @author Donii Sergii&lt;doniysa@gmail.com>
+     */
+    sync(moved, rOptions, countTry) {
+        countTry = countTry || 0;
+
+        if (countTry > 200) {
+            return;
+        }
+
+        let sync = this.rsyncBuild(rOptions.dest, rOptions.src);
+
+        if (moved) {
+            sync.set('remove-source-files')
+        }
+
+        sync.execute((error, stdout, stderr) => {
+        })
+    }
+
+    /**
+     * Run rsync
+     * @param {Boolean} moved If true - delete source file after sync
+     *
+     * @author Donii Sergii&lt;doniysa@gmail.com>
+     */
+    process(moved) {
+        moved     = typeof moved !== "undefined" ? moved : false;
+        let _self = this;
+
+        _.each(this.paths, (path) => {
+            ((moved, path) => {
+                _self.sync(moved, path);
+            })(moved, path);
+
+        });
+    }
+
+    /**
+     * Watch source files for copy
+     *
+     * @author Donii Sergii&lt;doniysa@gmail.com>
+     */
+    buildWatch() {
+        let sources = [];
+        this.paths.forEach((path) => {
+            sources.push(path.src);
+        });
+        watch(sources, this.tasks);
+    }
+}
+
+module.exports = CopyFiles;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BaseBuild.html">BaseBuild</a></li><li><a href="Concat.html">Concat</a></li><li><a href="CopyFiles.html">CopyFiles</a></li><li><a href="Css.html">Css</a></li><li><a href="Images.html">Images</a></li><li><a href="JS.html">JS</a></li><li><a href="PathBuild.html">PathBuild</a></li><li><a href="PrepareOptions.html">PrepareOptions</a></li><li><a href="Server.html">Server</a></li><li><a href="Templates.html">Templates</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_">_</a></li><li><a href="global.html#_config">_config</a></li><li><a href="global.html#baseBuild">baseBuild</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#gulp">gulp</a></li><li><a href="global.html#pathBuild">pathBuild</a></li><li><a href="global.html#pathConfig">pathConfig</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Jun 21 2017 10:08:58 GMT+0300 (EEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: config.dist.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: config.dist.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by Donii Sergii &lt;doniysa@gmail.com> on 5/1/17.
+ */
+
+/**
+ * @content Test tag
+ */
+
+/**
+ * @const {Object} pathConfig
+ * Config paths definitions. It's a virtual constants (for documentation) and tell you about path generate.
+ *
+ * You can definition as strings array path, destination folder will be put from &lt;a href="global.html#config">config.outDir&lt;/a> and src will be everyone string
+ * &lt;br/>
+ * &lt;br/>
+ * You can use relative path or full. If you used relative path, you must define &lt;a href="global.html#config">config.outDir&lt;/a> and &lt;a href="global.html#config">config.distDir&lt;/a> in your config file
+ * &lt;br/>
+ * &lt;br/>
+ * In the obligatory case, that was not transferred after processing, this config will consist of an array of objects with two properties:
+ * @property {String} src Source folder
+ * @property {String} dest Destination folder
+ * @see PathBuild
+ *
+ */
+
+/**
+ * @const {Object} config
+ * Config options
+ *
+ * @property {String} distDir Base path to distributive (must be fully)
+ * @property {String} outDir Base path to output dir (must be fully)
+ *
+ * @property {Object} server Server config
+ * @property {String} server.path Path to server
+ * @property {Number} server.port Server port
+ * @property {Boolean} server.openInBrowser Open default Browser after start7
+ *
+ * @property {Object} liveReloadOptions Live reload options. Options list see on &lt;a target="_blank" href=https://github.com/vohof/gulp-livereload>gulp-livereload API&lt;/a>
+ *
+ * @property {Object|Array} css CSS Options. If you want usage several processor, define as array object, options are (for everyone):
+ * @property {Object|Array|String} css.path Config path. See &lt;a href="global.html#pathConfig">For detail&lt;/a>
+ * @property {Array} css.ignores Ignores pattern which will be adding to all &lt;code>gulp.src&lt;/code> functions for css build
+ * @property {String} css.processor Package name for build
+ * @property {Object} css.liveReloadOptions &lt;a target="_blank" href=https://github.com/vohof/gulp-livereload>Livereload&lt;/a> options for css building
+ * @property {Function|undefined} css.additionalMinifyWatchCallback Additional minify watch callback. Called on &lt;a href="Css.html">Css class&lt;/a>
+ * @property {Function|undefined} css.additionalBuildCallback Additional build callback. Called on &lt;a href="Css.html">Css class&lt;/a>
+ * @property {Function|undefined} css.additionalWatchCallback Additional watch callback. Called on &lt;a href="Css.html">Css class&lt;/a>
+ * @property {Function|undefined} css.additionalMinifyWatchCallback Additional minify watch callback. Called on &lt;a href="Css.html">Css class&lt;/a>
+ * @property {Function|undefined} css.minifyOptions Options for &lt;a target="_blank" href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css&lt;/a> package
+ * @property {String|undefined} css.minifySuffix Minify suffix for min file versions. By default is &lt;code>.min&lt;/code>
+ * @property {String|Array} css.watchTasks Task which will be run on build files watcher. Be default is &lt;code>build-css&lt;/code>
+ * @property {String|Array} css.watchMinifyTasks Task which will be run on minify files watcher. Be default is &lt;code>minify-css&lt;/code>
+ * @property {Array|Object} css.additionalMinifyPath Additional minify files pattern which will be adding to all &lt;code>gulp.src&lt;/code> functions for minify css. See &lt;a href="global.html#pathConfig">Path config options&lt;/a> for detail
+ * @property {Boolean} css.enableMin Enable or disable run minify task &amp; watcher. By default is true
+ * @property {Object} css.processorOptions Options for gulp package which will be build css. Testing on &lt;a target="_blank" href="https://github.com/stevelacy/gulp-stylus">gulp-stylus&lt;/a>, &lt;a target="_blank" href="https://github.com/dlmanning/gulp-sass">gulp-sass&lt;/a> and &lt;a target="_blank" href="https://github.com/stevelacy/gulp-less">gulp-less&lt;/a>
+ *
+ * @property {Object} images Images optimize config
+ * @property {String} images.processorName NPM package name for image optimizer (by default is &lt;a href="" target="blank">gulp-imagemin&lt;/a>
+ * @property {Object} images.liveReloadOptions Options for &lt;a target="_blank" href=https://github.com/vohof/gulp-livereload>Livereload&lt;/a>
+ * @property {Object} images.paths Config path. See &lt;a href="global.html#pathConfig">For detail&lt;/a>
+ *
+ * @property {Object|Array} templates CSS Options. If you want usage several processor, define as array object, options are (for everyone):
+ * @property {Object|Array|String} templates.path Config path. See &lt;a href="global.html#pathConfig">For detail&lt;/a>
+ * @property {Array} templates.ignores Ignores pattern which will be adding to all &lt;code>gulp.src&lt;/code> functions for templates build
+ * @property {String} templates.processor Package name for build
+ * @property {Object} templates.liveReloadOptions &lt;a target="_blank" href=https://github.com/vohof/gulp-livereload>Livereload&lt;/a> options for templates building
+ * @property {Function|undefined} templates.additionalMinifyWatchCallback Additional minify watch callback. Called on &lt;a href="Templates.html">Templates class&lt;/a>
+ * @property {Function|undefined} templates.additionalBuildCallback Additional build callback. Called on &lt;a href="Templates.html">Templates class&lt;/a>
+ * @property {Function|undefined} templates.additionalWatchCallback Additional watch callback. Called on &lt;a href="Templates.html">Templates class&lt;/a>
+ * @property {Function|undefined} templates.additionalMinifyWatchCallback Additional minify watch callback. Called on &lt;a href="Templates.html">Templates class&lt;/a>
+ * @property {Function|undefined} templates.minifyOptions Options for &lt;a target="_blank" href="https://github.com/jonschlinkert/gulp-htmlmin">gulp-minhtml&lt;/a> package
+ * @property {String|undefined} templates.minifySuffix Minify suffix for min file versions. By default is &lt;code>.min&lt;/code>
+ * @property {String|Array} templates.watchTasks Task which will be run on build files watcher. Be default is &lt;code>minify-html&lt;/code>
+ * @property {String|Array} templates.watchMinifyTasks Task which will be run on minify files watcher. Be default is &lt;code>minify-html&lt;/code>
+ * @property {Array|Object} templates.additionalMinifyPath Additional minify files pattern which will be adding to all &lt;code>gulp.src&lt;/code> functions for minify templates. See &lt;a href="global.html#pathConfig">Path config options&lt;/a> for detail
+ * @property {Boolean} templates.enableMin Enable or disable run minify task &amp; watcher. By default is true
+ * @property {Object} templates.processorOptions Options for gulp package which will be build templates. Testing on &lt;a target="_blank" href="https://github.com/pugjs/gulp-pug">gulp-pug&lt;/a>
+ *
+ * @property {Object|Array} js JS build Options. If you want usage several processor, or several distributive dir define as array object, options are (for everyone):
+ * @property {Object|Array|String} js.paths Config path. See &lt;a href="global.html#pathConfig">For detail&lt;/a>
+ * @property {Array} js.ignores Ignores pattern which will be adding to all &lt;code>gulp.src&lt;/code> functions for js build
+ * @property {String} js.processor Package name for build
+ * @property {Object} js.liveReloadOptions &lt;a target="_blank" href=https://github.com/vohof/gulp-livereload>Livereload&lt;/a> options for js building
+ * @property {Function|undefined} js.additionalMinifyWatchCallback Additional minify watch callback. Called on &lt;a href="Js.html">JS class&lt;/a>
+ * @property {Function|undefined} js.additionalBuildCallback Additional build callback. Called on &lt;a href="Js.html">JS class&lt;/a>
+ * @property {Function|undefined} js.additionalWatchCallback Additional watch callback. Called on &lt;a href="Js.html">JS class&lt;/a>
+ * @property {Function|undefined} js.additionalMinifyWatchCallback Additional minify watch callback. Called on &lt;a href="Js.html">JS class&lt;/a>
+ * @property {Function|undefined} js.minifyOptions Options for &lt;a target="_blank" href="https://github.com/terinjokes/gulp-uglify">gulp-uglify/a> package
+ * @property {String|undefined} js.minifySuffix Minify suffix for min file versions. By default is &lt;code>.min&lt;/code>
+ * @property {String|Array} js.watchTasks Task which will be run on build files watcher. Be default is &lt;code>build-js&lt;/code>
+ * @property {String|Array} js.watchMinifyTasks Task which will be run on minify files watcher. Be default is &lt;code>minify-js&lt;/code>
+ * @property {Array|Object} js.additionalMinifyPath Additional minify files pattern which will be adding to all &lt;code>gulp.src&lt;/code> functions for minify js. See &lt;a href="global.html#pathConfig">Path config options&lt;/a> for detail
+ * @property {Boolean} js.enableMin Enable or disable run minify task &amp; watcher. By default is true
+ * @property {Object} js.processorOptions Options for gulp package which will be build js. Testing on &lt;a target="_blank" href="https://github.com/stevelacy/gulp-stylus">gulp-stylus&lt;/a>, &lt;a target="_blank" href="https://github.com/dlmanning/gulp-sass">gulp-sass&lt;/a> and &lt;a target="_blank" href="https://github.com/stevelacy/gulp-less">gulp-less&lt;/a>
+ * @property {Object} js.originalConfig Config which giving in constructor
+ * @property {Object|Array} js.paths Paths
+ * @property {Object|Array} js.processorOptions Processor options
+ * @property {Array} tasks Additional js.task for build watcher
+ * @property {Array|Object|undefined} js.additionalMinifyPath Additional minify paths
+ * @property {Array|Object|undefined} js.additionalMinifyWatchCallback Additional minify watch paths
+ * @property {Array|Object|undefined} js.additionalBuildCallback Additional build paths config
+ * @property {Array|Object|undefined} js.additionalBuildCallback Additional build paths config
+ * @property {Array|Object|undefined} js.minifyOptions Options for &lt;a href="https://github.com/terinjokes/gulp-uglify" target="_blank">gulp-uglify&lt;/a> package
+ * @property {Function|undefined} js.additionalMinifyWatchCallback Additional minify watch callback
+ * @property {Function|undefined} js.additionalMinifyCallback Additional minify callback
+ * @property {String} js.minifySuffix Suffix for minified files
+ * @property {String} js.defaultProcessor Default processor
+ * @property {String|Array} js.defTasks Default run tasks
+ * @property {String|Array} js.watchTasks Watch tasks for build paths
+ * @property {String|Array} js.watchMinifyTasks Watch tasks for minify paths
+ * @property {Object} js.configPaths Default path from config
+ * @property {Object|Array} js.ignores Ignore files pattern
+ * @property {Object} js.babelOptions Options for gulp-babel package
+ *
+ * @property {Object|Array} copyFiles Copy files config
+ * @property {Object|Array} copyFiles.paths Copy files config path. See &lt;a href="global.html#pathConfig">For detail&lt;/a>
+ * @property {Object|Array} copyFiles.tasks Tasks list for watch. Default is &lt;code>copy&lt;/code>
+ * @property {Function} copyFiles.rsyncOptions Additional &lt;a href="https://github.com/mattijs/node-rsync" target='_blank'>rsync&lt;/a> callback for adding wrapper options
+ *
+ * @property {Object|Array} moveFiles Move files config
+ * @property {Object|Array} moveFiles.paths Copy files config path. See &lt;a href="global.html#pathConfig">For detail&lt;/a>
+ * @property {Object|Array} moveFiles.tasks Tasks list for watch. Default is &lt;code>move&lt;/code>
+ * @property {Function} moveFiles.rsyncOptions Additional &lt;a href="https://github.com/mattijs/node-rsync" target='_blank'>rsync&lt;/a> callback for adding wrapper options
+ *
+ * @property {Object} additionalTasks Additional tasks list in format "taskName": () => {... task body ...}
+ * @property {Object} additionalSeries Additional tasks series list in format "seriesName": [... tasks list ...]
+ *
+ * @property {Object} requireJSConcat AMD build app config
+ * @property {String} requireJSConcat.configFile Path to require.js config file
+ * @property {Object} requireJSConcat.minOptions Options for &lt;a href="https://github.com/terinjokes/gulp-uglify" target="_blank">gulp-uglify&lt;/a> building amd file
+ * @property {Object} requireJSConcat.sourcePath Path to output build file
+ * @property {String} requireJSConcat.minPath Path to minified builded file
+ *
+ * @property {Object} concatList Concatenate files config
+ * @property {Object} concatList.paths Paths in format 'outfileName': [... files list ...]
+ * @property {Object} concatList.concatOptions Options for &lt;a href="https://github.com/contra/gulp-concat" target="_blank">gulp-concat&lt;/a>
+ * @property {Object} concatList.minifyOptions Minify options for &lt;a href="https://github.com/terinjokes/gulp-uglify" target="_blank">gulp-uglify&lt;/a>
+ *
+ * @author Donii Sergii&lt;doniysa@gmail.com>
+ */
+const config = {
+
+    distDir           : __dirname + '/tests/test-project/dist',
+    outDir            : __dirname + '/tests/test-project/build',
+    server            : {
+        path         : __dirname + '/tests/test-project/build',
+        port         : 1112,
+        openInBrowser: true,
+    },
+    liveReloadOptions : {},
+    css               : {
+        paths                        : [
+            {
+                src : 'less/**/**/*.less',
+                dest: 'css/'
+            }
+        ],
+        ignorePatterns               : [
+            '!tests/test-project/dist/less/**/**/_*.less',
+            '!tests/test-project/dist/less/layouts/*.less',
+        ],
+        processor                    : 'gulp-less',
+        liveReloadOptions            : {},
+        additionalWatchCallback      : () => {
+        },
+        additionalBuildCallback      : () => {
+        },
+        additionalMinifyCallback     : () => {
+        },
+        additionalMinifyWatchCallback: () => {
+        },
+        additionalBuildWaCallback    : () => {
+        },
+        minifyOptions                : {
+            compatibility: 'ie9'
+        },
+        minifySuffix                 : '.min',
+        watchTasks                   : ['build-css'],
+        watchMinifyTasks             : ['minify-css'],
+        additionalMinifyPath         : [],
+    },
+    images            : {
+        paths: [
+            {
+                src : __dirname + '/tests/data/images/src/*',
+                dest: __dirname + '/tests/data/images/out',
+            }
+        ]
+    },
+    templates         : {
+        paths                        : [
+            {
+                src : 'templates/**/**/*.pug',
+                dest: ''
+            }
+        ],
+        ignorePatterns               : [
+            '!tests/test-project/dist/templates/layouts/*.pug'
+        ],
+        processor                    : 'gulp-pug',
+        processorOptions             : {
+            pretty: true
+        },
+        liveReloadOptions            : {},
+        additionalWatchCallback      : () => {
+        },
+        additionalBuildCallback      : () => {
+        },
+        additionalMinifyCallback     : () => {
+        },
+        additionalMinifyWatchCallback: () => {
+        },
+        additionalBuildWaCallback    : () => {
+        },
+        minifyOptions                : {
+            compatibility: 'ie9'
+        },
+        minifySuffix                 : '.min',
+        watchTasks                   : ['build-css'],
+        watchMinifyTasks             : ['minify-css'],
+        additionalMinifyPath         : [],
+        enableMin                    : true
+    },
+    js                : {
+        paths                        : [
+            {
+                src : 'js/*.js',
+                dest: 'js/'
+            }
+        ],
+        babelOptions                 : {
+            presets: ['es2015']
+        },
+        processorOptions             : {
+            presets: ['es2015']
+        },
+        processor                    : 'gulp-babel',
+        liveReloadOptions            : {},
+        additionalWatchCallback      : () => {
+        },
+        additionalBuildCallback      : () => {
+        },
+        additionalMinifyCallback     : () => {
+        },
+        additionalMinifyWatchCallback: () => {
+        },
+        additionalBuildWaCallback    : () => {
+        },
+        minifyOptions                : {
+            compatibility: 'ie9'
+        },
+        minifySuffix                 : '.min',
+        watchTasks                   : ['build-css'],
+        watchMinifyTasks             : ['minify-css'],
+        additionalMinifyPath         : []
+
+    },
+    copyFiles         : {
+        rsyncOptions: {},
+        paths       : [
+            {
+                src : __dirname + '/tests/test-project/dist/plugins/*',
+                dest: __dirname + '/tests/test-project/build/plugins'
+            }
+        ]
+    },
+    moveFiles         : {
+        rsyncOptions: {},
+        paths       : [
+            {
+                src : __dirname + '/tests/test-project/dist/plugins/yii/yii.js',
+                dest: __dirname + '/tests/test-project/build/'
+            },
+            {
+                src : __dirname + '/tests/test-project/build/yii.js',
+                dest: __dirname + '/tests/test-project/dist/plugins/yii/yii.js'
+            },
+        ]
+    },
+    concatList        : [
+        {
+            'js.min.js': [
+                '123',
+                '123',
+                '213'
+            ],
+        }
+    ],
+    additionalTasks   : {},
+    additionalSeries  : {},
+    requireJSConcat   : {
+        configFile: '',
+        minOptions: {},
+        sourcePath: '',
+        minPath   : ''
+    },
+};
+
+module.exports = config;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BaseBuild.html">BaseBuild</a></li><li><a href="Concat.html">Concat</a></li><li><a href="CopyFiles.html">CopyFiles</a></li><li><a href="Css.html">Css</a></li><li><a href="Images.html">Images</a></li><li><a href="JS.html">JS</a></li><li><a href="PathBuild.html">PathBuild</a></li><li><a href="PrepareOptions.html">PrepareOptions</a></li><li><a href="Server.html">Server</a></li><li><a href="Templates.html">Templates</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_">_</a></li><li><a href="global.html#_config">_config</a></li><li><a href="global.html#baseBuild">baseBuild</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#gulp">gulp</a></li><li><a href="global.html#pathBuild">pathBuild</a></li><li><a href="global.html#pathConfig">pathConfig</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Jun 21 2017 10:08:58 GMT+0300 (EEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

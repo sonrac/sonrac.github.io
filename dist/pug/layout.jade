@@ -1,0 +1,32 @@
+doctype
+html
+    head
+        title
+            |Documentation for packages
+        link(href="shared/bootstrap/css/bootstrap.min.css",rel="stylesheet",rev="stylesheet")
+        script(src="shared/jquery/jquery.min.js", type="text/javascript")
+        script(src="shared/bootstrap/js/bootstrap.min.js", type="text/javascript")
+
+body
+    nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+        .container
+            .navbar-header
+                a(href="").navbar-brand
+                    | Documentation
+            .collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li.dropdown
+                        a.dropdown-toggle(data-toggle="dropdown", href="#")
+                            | Yii2 packages documentation
+                            span.caret
+                        ul.dropdown-menu
+                            li
+                                a(href="docs/yii2/relational")
+                                    | Relational model
+                    li
+                        a(href="docs/gulp-template")
+                            | Gulp template
+    .container
+        .row
+            block content
+            block footer

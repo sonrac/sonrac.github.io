@@ -1,0 +1,21 @@
+{
+  "name": "sonrac.github.io",
+  "homepage": "https://github.com/sonrac/sonrac.github.io",
+  "authors": [
+    "Donii Sergii <doniysa@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  }
+}
