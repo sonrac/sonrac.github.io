@@ -1,34 +1,102 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>JSDoc: Class: Concat</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>GULP template API description Class: Concat</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.lumen.css">
+	<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="favicons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
 </head>
 
 <body>
 
-<div id="main">
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">GULP template API description</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="BaseBuild.html">BaseBuild</a></li><li><a href="Concat.html">Concat</a></li><li><a href="CopyFiles.html">CopyFiles</a></li><li><a href="Css.html">Css</a></li><li><a href="Images.html">Images</a></li><li><a href="JS.html">JS</a></li><li><a href="PathBuild.html">PathBuild</a></li><li><a href="PrepareOptions.html">PrepareOptions</a></li><li><a href="Server.html">Server</a></li><li><a href="Templates.html">Templates</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="global.html#config">config</a></li><li><a href="global.html#pathConfig">pathConfig</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
 
-    <h1 class="page-title">Class: Concat</h1>
-
-    
-
+</div>
+</div>
 
 
+<div class="container" id="toc-content">
+<div class="row">
 
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	<h1 class="page-title">Class: Concat</h1>
 <section>
 
 <header>
     
-        <h2>Concat</h2>
+        <h2>
+        Concat
+        </h2>
         
             <div class="class-description">Concat
 Concatenate files</div>
@@ -36,37 +104,35 @@ Concatenate files</div>
     
 </header>
 
+
 <article>
     <div class="container-overview">
     
         
+<hr>
+<dt>
+    <h4 class="name" id="Concat"><span class="type-signature"></span>new Concat(options, liveReloadOptions, defPaths, useAMD)</h4>
+    
+    
+</dt>
+<dd>
 
     
-    <h2>Constructor</h2>
+    <div class="description">
+        Concat constructor
+    </div>
     
 
-    <h4 class="name" id="Concat"><span class="type-signature"></span>new Concat<span class="signature">(options, liveReloadOptions, defPaths, useAMD)</span><span class="type-signature"></span></h4>
+    
 
     
 
-
-
-<div class="description">
-    Concat constructor
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
     
+    
+        <h5>Parameters:</h5>
+        
 
-<table class="params">
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -97,6 +163,7 @@ Concatenate files</div>
 <span class="param-type">Object</span>
 
 
+
             
             </td>
 
@@ -118,6 +185,7 @@ Concatenate files</div>
             
                 
 <span class="param-type">Object</span>
+
 
 
             
@@ -143,6 +211,7 @@ Concatenate files</div>
 <span class="param-type">Object</span>
 
 
+
             
             </td>
 
@@ -166,6 +235,7 @@ Concatenate files</div>
 <span class="param-type">Boolean</span>
 
 
+
             
             </td>
 
@@ -180,16 +250,17 @@ Concatenate files</div>
     </tbody>
 </table>
 
+    
 
-
-
-
+    
+<dl class="details">
+    
 
     <h5 class="subsection-title">Properties:</h5>
 
-    
+    <dl>
 
-<table class="props">
+<table class="props table table-striped">
     <thead>
     <tr>
         
@@ -220,6 +291,7 @@ Concatenate files</div>
 <span class="param-type">Object</span>
 
 
+
             
             </td>
 
@@ -246,6 +318,7 @@ Concatenate files</div>
 <span class="param-type">Array</span>
 
 
+
             
             </td>
 
@@ -267,6 +340,7 @@ Concatenate files</div>
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -292,6 +366,7 @@ Concatenate files</div>
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -313,6 +388,7 @@ Concatenate files</div>
             
                 
 <span class="param-type">Boolean</span>
+
 
 
             
@@ -338,6 +414,7 @@ Concatenate files</div>
 <span class="param-type">Object</span>
 
 
+
             
             </td>
 
@@ -361,6 +438,7 @@ Concatenate files</div>
 <span class="param-type">Boolean</span>
 
 
+
             
             </td>
 
@@ -374,11 +452,15 @@ Concatenate files</div>
     
     </tbody>
 </table>
+</dl>
 
+    
 
+	
 
+	
 
-<dl class="details">
+	
 
     
 
@@ -388,50 +470,52 @@ Concatenate files</div>
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="helpers_Concat.js.html">helpers/Concat.js</a>,
+				 <a href="helpers_Concat.js.html#sunlight-1-line-39">line 39</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers_Concat.js.html">helpers/Concat.js</a>, <a href="helpers_Concat.js.html#line23">line 23</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
+    
+</dd>
 
     
     </div>
@@ -442,7 +526,7 @@ Concatenate files</div>
 
     
 
-     
+    
 
     
 
@@ -451,34 +535,169 @@ Concatenate files</div>
     
         <h3 class="subsection-title">Methods</h3>
 
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id="addToTasks"><span class="type-signature"></span>addToTasks(path, regex, callback, callbackParams)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Add to task
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
         
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
             
 
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Source path</td>
+        </tr>
+
     
 
-    <h4 class="name" id="processPath"><span class="type-signature"></span>processPath<span class="signature">()</span><span class="type-signature"></span></h4>
+        <tr>
+            
+                <td class="name"><code>regex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">RegExp</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Regexp object</td>
+        </tr>
 
     
 
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
 
-
-<div class="description">
-    Process parse paths
-</div>
-
-
-
-
-
-
-
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
 
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callable function</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callbackParams</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">undefined</span>
+|
+
+<span class="param-type">Array</span>
 
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Options for callback</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
 <dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -488,161 +707,105 @@ Concatenate files</div>
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="helpers_Concat.js.html">helpers/Concat.js</a>,
+				 <a href="helpers_Concat.js.html#sunlight-1-line-106">line 106</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers_Concat.js.html">helpers/Concat.js</a>, <a href="helpers_Concat.js.html#line51">line 51</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-        
+    
+    <h5>Returns:</h5>
+    
             
 
-    
 
-    <h4 class="name" id="runConcat"><span class="type-signature"></span>runConcat<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Run concatenate files
-</div>
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
 
 
 
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers_Concat.js.html">helpers/Concat.js</a>, <a href="helpers_Concat.js.html#line70">line 70</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
 
+        
 
-
-
-
-
-
-
-
-
-
-
-
-
+    
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="build"><span class="type-signature"></span>build()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Run concatenate files
+    </div>
+    
 
     
 
-    <h4 class="name" id="runMinify"><span class="type-signature"></span>runMinify<span class="signature">()</span><span class="type-signature"></span></h4>
-
     
 
+    
+    
 
-
-<div class="description">
-    Run minify files
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 <dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -652,79 +815,85 @@ Concatenate files</div>
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="helpers_Concat.js.html">helpers/Concat.js</a>,
+				 <a href="helpers_Concat.js.html#sunlight-1-line-132">line 132</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers_Concat.js.html">helpers/Concat.js</a>, <a href="helpers_Concat.js.html#line85">line 85</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
+    
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="buildWatch"><span class="type-signature"></span>buildWatch()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Run watch files changed
+    </div>
+    
 
     
 
-    <h4 class="name" id="runWatch"><span class="type-signature"></span>runWatch<span class="signature">()</span><span class="type-signature"></span></h4>
-
     
 
+    
+    
 
-
-<div class="description">
-    Run watch files changed
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 <dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -734,52 +903,318 @@ Concatenate files</div>
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="helpers_Concat.js.html">helpers/Concat.js</a>,
+				 <a href="helpers_Concat.js.html#sunlight-1-line-208">line 208</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers_Concat.js.html">helpers/Concat.js</a>, <a href="helpers_Concat.js.html#line92">line 92</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
+    
+</dd>
 
         
+            
+<hr>
+<dt>
+    <h4 class="name" id="minify"><span class="type-signature"></span>minify()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Run minify files
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="helpers_Concat.js.html">helpers/Concat.js</a>,
+				 <a href="helpers_Concat.js.html#sunlight-1-line-173">line 173</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="minifyWatch"><span class="type-signature"></span>minifyWatch()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Watch changed source files for minified
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="helpers_Concat.js.html">helpers/Concat.js</a>,
+				 <a href="helpers_Concat.js.html#sunlight-1-line-215">line 215</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="processPath"><span class="type-signature"></span>processPath()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Process parse paths
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="helpers_Concat.js.html">helpers/Concat.js</a>,
+				 <a href="helpers_Concat.js.html#sunlight-1-line-76">line 76</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        </dl>
     
 
     
@@ -792,19 +1227,171 @@ Concatenate files</div>
 
 
 
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BaseBuild.html">BaseBuild</a></li><li><a href="Concat.html">Concat</a></li><li><a href="CopyFiles.html">CopyFiles</a></li><li><a href="Css.html">Css</a></li><li><a href="Images.html">Images</a></li><li><a href="JS.html">JS</a></li><li><a href="PathBuild.html">PathBuild</a></li><li><a href="PrepareOptions.html">PrepareOptions</a></li><li><a href="Server.html">Server</a></li><li><a href="Templates.html">Templates</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_">_</a></li><li><a href="global.html#_config">_config</a></li><li><a href="global.html#baseBuild">baseBuild</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#gulp">gulp</a></li><li><a href="global.html#pathBuild">pathBuild</a></li><li><a href="global.html#pathConfig">pathConfig</a></li></ul>
-</nav>
 
-<br class="clear">
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Jun 21 2017 10:21:47 GMT+0300 (EEST)
+
+
+	<span class="copyright">
+	Powered by @jsDOC. Author Donii Sergii <doniysa@gmail.com>
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on 2017-06-26T11:39:29+03:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+<script>
+	$( function () {
+		$( '#main' ).localScroll( {
+			offset : { top : 60 } //offset by the height of your header (give or take a few px, see what works for you)
+		} );
+		$( "dt.name" ).each( function () {
+			var $this = $( this ).find("h4");
+			var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+			var dt = $(this);
+			var children = dt.next( "dd" );
+
+			dt.prepend( icon ).css( {cursor : "pointer"} );
+			dt.addClass( "member-collapsed" ).addClass( "member" );
+
+
+			children.hide();
+
+			dt.children().on( "click", function () {
+				children = dt.next( "dd" );
+				children.slideToggle( "fast", function () {
+
+					if ( children.is( ":visible" ) ) {
+						icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+						dt.addClass( "member-open" ).animate( "member-collapsed" );
+					} else {
+						icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+						dt.addClass( "member-collapsed" ).removeClass( "member-open" );
+					}
+				} );
+			} );
+
+		} );
+	} );
+</script>
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
 </body>
 </html>
