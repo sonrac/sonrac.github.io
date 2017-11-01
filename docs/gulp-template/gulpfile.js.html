@@ -115,8 +115,6 @@
  * @ignore open
  */
 const series          = require('gulp-series'),
-      connect         = require('gulp-connect'),
-      open            = require('open'),
       _               = require('lodash'),
       os              = require('os'),
       fs              = require('fs'),
@@ -140,9 +138,8 @@ const series          = require('gulp-series'),
        * @const
        * @type {number}
        */
-      WATCH_ALL       = 2,
+      WATCH_ALL       = 3,
       concat          = require('./helpers/Concat'),
-      backgrounder    = require("backgrounder"),
       exec            = require('child_process').exec,
       copyFiles       = require('./helpers/CopyFiles'),
       templates       = require("./helpers/Templates"),
@@ -198,7 +195,7 @@ const series          = require('gulp-series'),
           if (!onlyWatch) {
               copy.process(move);
           } else {
-              copy.buildWatch();
+              copy.buildWatch(gulp);
           }
       },
       /**
@@ -225,15 +222,18 @@ const series          = require('gulp-series'),
                   } else {
                       switch (watchType) {
                           case WATCH_BUILD:
-                              object.buildWatch();
+                              object.buildWatch(gulp);
                               break;
                           case WATCH_MINIFY:
-                              object.minifyWatch();
+                              object.minifyWatch(gulp);
                               break;
                           case WATCH_ALL:
-                              object.buildWatch();
-                              object.minifyWatch();
+                              object.buildWatch(gulp);
+                              object.minifyWatch(gulp);
+                              break;
                           default:
+                              console.log(123123);
+
                               object[watchType]();
                               break;
                       }
@@ -252,7 +252,6 @@ const series          = require('gulp-series'),
 series.registerTasks({
     "server"         : () => {
         let fd;
-        fd       = fs.openSync(__dirname + '/.pids', 'r');
         let pids = fs.readFileSync(__dirname + '/.pids');
 
         if (pids = pids.toString()) {
@@ -267,32 +266,32 @@ series.registerTasks({
 
     },
     "minify-css"     : () => {
-        nextBuildTask.call(this, ['css', css, true]);
+        nextBuildTask.apply(this, ['css', css, true]);
     },
     "build-css"      : () => {
-        nextBuildTask.call(this, ['css', css]);
+        nextBuildTask.apply(this, ['css', css]);
     },
     "minify-js"      : () => {
-        nextBuildTask.call(this, ['js', mJS, true]);
+        nextBuildTask.apply(this, ['js', mJS, true]);
 
     },
     "build-js"       : () => {
-        nextBuildTask.call(this, ['js', mJS]);
+        nextBuildTask.apply(this, ['js', mJS]);
     },
     "imagemin"       : () => {
-        nextBuildTask.call(this, ['images', images, true]);
+        nextBuildTask.apply(this, ['images', images, true]);
     },
     "ts"             : () => {
-        nextBuildTask.call(this, ['ts', mJS]);
+        nextBuildTask.apply(this, ['ts', mJS]);
     },
     "templates"      : () => {
-        nextBuildTask.call(this, ['templates', templates]);
+        nextBuildTask.apply(this, ['templates', templates]);
     },
     "minify-html"    : () => {
-        nextBuildTask.call(this, ['templates', templates, true]);
+        nextBuildTask.apply(this, ['templates', templates, true]);
     },
     "coffee"         : () => {
-        nextBuildTask.call(this, ['coffee', mJs]);
+        nextBuildTask.apply(this, ['coffee', mJs]);
     },
     "copy"           : () => {
         copyTask('copyFiles', false);
@@ -306,24 +305,24 @@ series.registerTasks({
             .pipe(gulp.dest('.'));
     },
     "amd-build"      : () => {
-        nextBuildTask.call(this, ['requireJSConcat', concat]);
+        nextBuildTask.apply(this, ['requireJSConcat', concat]);
     },
     "concat"         : () => {
-        nextBuildTask.call(this, ['concat', concat]);
+        nextBuildTask.apply(this, ['concat', concat]);
     },
     "concat-minify"  : () => {
-        nextBuildTask.call(this, ['concat', concat, true]);
+        nextBuildTask.apply(this, ['concat', concat, true]);
     },
     "watch-css"      : () => {
-        nextBuildTask.call(this, ['css', css, 'all', WATCH_ALL]);
+        nextBuildTask.apply(this, ['css', css, 'all', WATCH_BUILD]);
     },
     "watch-js"       : () => {
-        nextBuildTask.call(this, ['js', mJS, 'all', WATCH_ALL]);
-        nextBuildTask.call(this, ['ts', mJS, 'all', WATCH_ALL]);
-        nextBuildTask.call(this, ['coffee', mJS, 'all', WATCH_ALL]);
+        nextBuildTask.apply(this, ['js', mJS, 'all', WATCH_BUILD]);
+        nextBuildTask.apply(this, ['ts', mJS, 'all', WATCH_BUILD]);
+        nextBuildTask.apply(this, ['coffee', mJS, 'all', WATCH_BUILD]);
     },
     "watch-templates": () => {
-        nextBuildTask.call(this, ['templates', templates, false, WATCH_BUILD]);
+        nextBuildTask.apply(this, ['templates', templates, false, WATCH_BUILD]);
     },
     "watch-copy"     : () => {
         copyTask('copyFiles', false, true);
@@ -332,18 +331,18 @@ series.registerTasks({
         copyTask('moveFiles', true, true);
     },
     "watch-images"   : () => {
-        nextBuildTask.call(this, ['images', images, false, WATCH_BUILD]);
+        nextBuildTask.apply(this, ['images', images, false, WATCH_BUILD]);
     },
     "watch-coffee"   : () => {
-        nextBuildTask.call(this, ['coffee', mJS, false, WATCH_ALL]);
+        nextBuildTask.apply(this, ['coffee', mJS, false, WATCH_ALL]);
     },
     "watch-ts"       : () => {
-        nextBuildTask.call(this, ['ts', mJS, false, WATCH_ALL]);
+        nextBuildTask.apply(this, ['ts', mJS, false, WATCH_ALL]);
     },
     "watch-amd-build": () => {
     },
     "watch-concat"   : () => {
-        nextBuildTask.call(this, ['concat', concat, 'all', WATCH_ALL]);
+        nextBuildTask.apply(this, ['concat', concat, 'all', WATCH_ALL]);
     },
 
 });
@@ -357,7 +356,7 @@ series.registerSeries('s-templates-move', ['templates', 'minify-html', 'move']);
 series.registerSeries('s-minify-css-move', ['minify-css', 'move']);
 series.registerSeries('s-minify-js-move', ['minify-js', 'move']);
 series.registerSeries('build', ['build-css', 'build-js', 'server', 'templates', 'minify-css', 'minify-js', 'minify-html', 'imagemin', 'copy', 'move']);
-series.registerSeries('s-build', ['build-css', 'build-js', 'server', 'templates', 'minify-css', 'minify-js', 'minify-html', 'imagemin', 'copy', 'move']);
+series.registerSeries('s-build', ['build-css', 'build-js', 'server', 'templates', 'minify-css', 'minify-js', 'minify-html', 'imagemin', 'copy', 'move', 'watch-move', 'concat', 'watch-concat', 'watch-ts', 'watch-coffee', 'watch-copy']);
 series.registerSeries('default', ['build-css', 'build-js', 'templates', 'minify-css', 'minify-js', 'minify-html', 'imagemin', 'copy', 'move', 'server']);
 series.registerSeries('s-default', ['build-css', 'build-js', 'templates', 'minify-css', 'minify-js', 'minify-html', 'imagemin', 'copy', 'move', 'server']);
 
@@ -373,7 +372,8 @@ if (_.size(_config.additionalSeries)) {
 
 module.exports = {
     series: series,
-    config: _config
+    config: _config,
+    gulp: gulp
 };</pre>
     </article>
 </section>
@@ -417,9 +417,9 @@ module.exports = {
 	</span>
 
 <span class="jsdoc-message">
-	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
 	
-		on 2017-06-28T04:19:40+03:00
+		on 2017-09-06T20:36:26+03:00
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
