@@ -119,15 +119,21 @@
         <li class="nav-header">
             <i class="icon-custom icon-method"></i> Methods
             <ul>
-                                                                                                                                                                                                                    <li class="method public">
+                                                                                                                                                                                                                                                                            <li class="method public">
         <a href="#method_getAllowRedirect" title="getAllowRedirect :: ">
             <span class="description"></span><pre>getAllowRedirect</pre>
         </a>
     </li>
 
-                                                                                                        <li class="method public">
+                                                                                                                                                                <li class="method public">
         <a href="#method_getCountRedirects" title="getCountRedirects :: Get count redirects.">
             <span class="description">Get count redirects.</span><pre>getCountRedirects</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getResponseObject" title="getResponseObject :: Get response object.">
+            <span class="description">Get response object.</span><pre>getResponseObject</pre>
         </a>
     </li>
 
@@ -149,7 +155,13 @@
         </a>
     </li>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <li class="method public">
+                                                                                                                                                                                                                                                                                                                                        <li class="method public">
+        <a href="#method_seeCountInTable" title="seeCountInTable :: See in table count records.">
+            <span class="description">See in table count records.</span><pre>seeCountInTable</pre>
+        </a>
+    </li>
+
+                                                                                                                                                                                                                                                                                                                                        <li class="method public">
         <a href="#method_setAllowRedirect" title="setAllowRedirect :: ">
             <span class="description"></span><pre>setAllowRedirect</pre>
         </a>
@@ -178,6 +190,11 @@
         <li class="nav-header protected">» Protected
             <ul>
                                                                             <li class="method protected">
+                            <a href="#method_clear" title="clear :: Clear global arrays.">
+                                <span class="description">Clear global arrays.</span><pre>clear</pre>
+                            </a>
+                        </li>
+                                                                                <li class="method protected">
                             <a href="#method_delete" title="delete :: Calls a DELETE URI.">
                                 <span class="description">Calls a DELETE URI.</span><pre>delete</pre>
                             </a>
@@ -185,6 +202,11 @@
                                                                                 <li class="method protected">
                             <a href="#method_get" title="get :: Calls a GET URI.">
                                 <span class="description">Calls a GET URI.</span><pre>get</pre>
+                            </a>
+                        </li>
+                                                                                                                    <li class="method protected">
+                            <a href="#method_getConnection" title="getConnection :: Get database connection.">
+                                <span class="description">Get database connection.</span><pre>getConnection</pre>
                             </a>
                         </li>
                                                                                                                                                                                                                                                                     <li class="method protected">
@@ -207,7 +229,7 @@
                                 <span class="description">Calls a URI.</span><pre>request</pre>
                             </a>
                         </li>
-                                                                                <li class="method protected">
+                                                                                                                    <li class="method protected">
                             <a href="#method_seeHeader" title="seeHeader :: See header in response.">
                                 <span class="description">See header in response.</span><pre>seeHeader</pre>
                             </a>
@@ -231,7 +253,7 @@
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -248,11 +270,10 @@
                 <h1>ControllersTestTrait</h1>
                 <small style="display: block; text-align: right">
                                                         </small>
-                <p class="short_description">Trait ControllersTestTrait
-Controllers test trait.</p>
+                <p class="short_description">Trait ControllersTestTrait</p>
                 <div class="details">
                     <div class="long_description">
-                        
+                        <p>Controllers test trait.</p>
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -276,7 +297,41 @@ Controllers test trait.</p>
                                                                                                                                                                                 </table>
 
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
-                                                                <a id="method_delete"></a>
+                                                                <a id="method_clear"></a>
+                        <div class="element clickable method protected  method_clear" data-toggle="collapse" data-target=".method_clear .collapse">
+                            <h2>Clear global arrays.</h2>
+                            <pre>clear() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_delete"></a>
                         <div class="element clickable method protected  method_delete" data-toggle="collapse" data-target=".method_delete .collapse">
                             <h2>Calls a DELETE URI.</h2>
                             <pre>delete(string $uri, array $parameters = array(), array $files = array(), array $server = array(), string $content = null, boolean $changeHistory = true) : $this</pre>
@@ -410,6 +465,44 @@ and reload())</p></p>
                             </div>
 
                         </div>
+                                            <a id="method_getConnection"></a>
+                        <div class="element clickable method protected  method_getConnection" data-toggle="collapse" data-target=".method_getConnection .collapse">
+                            <h2>Get database connection.</h2>
+                            <pre>getConnection() : \Doctrine\DBAL\Connection</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    author
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Doctrine\DBAL\Connection</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                                             <a id="method_getCountRedirects"></a>
                         <div class="element clickable method public  method_getCountRedirects" data-toggle="collapse" data-target=".method_getCountRedirects .collapse">
                             <h2>Get count redirects.</h2>
@@ -444,6 +537,44 @@ and reload())</p></p>
                                     
                                                                             <h3>Response</h3>
                                         <code>integer</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getResponseObject"></a>
+                        <div class="element clickable method public  method_getResponseObject" data-toggle="collapse" data-target=".method_getResponseObject .collapse">
+                            <h2>Get response object.</h2>
+                            <pre>getResponseObject() : \Symfony\Component\HttpFoundation\Response|null</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    author
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Symfony\Component\HttpFoundation\Response|null</code><p></p>
                                                                     </div>
                             </div>
 
@@ -763,6 +894,50 @@ and reload())</p></p>
                             </div>
 
                         </div>
+                                            <a id="method_seeCountInTable"></a>
+                        <div class="element clickable method public  method_seeCountInTable" data-toggle="collapse" data-target=".method_seeCountInTable .collapse">
+                            <h2>See in table count records.</h2>
+                            <pre>seeCountInTable(string $table, integer $count, array|null $params = null) : $this</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    author
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$table</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$count</h4>
+                                                <code>integer</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$params</h4>
+                                                <code>array|null</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>$this</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                                             <a id="method_seeHeader"></a>
                         <div class="element clickable method protected  method_seeHeader" data-toggle="collapse" data-target=".method_seeHeader .collapse">
                             <h2>See header in response.</h2>
@@ -797,7 +972,7 @@ and reload())</p></p>
                                             <a id="method_seeInDatabase"></a>
                         <div class="element clickable method protected  method_seeInDatabase" data-toggle="collapse" data-target=".method_seeInDatabase .collapse">
                             <h2>See in database.</h2>
-                            <pre>seeInDatabase(string $table, array|string $condition) </pre>
+                            <pre>seeInDatabase(string $table, array|string $condition) : $this</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -814,13 +989,6 @@ and reload())</p></p>
                                                 <td>
                                                                                                                                                                         
                                                                                                                                                                         <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
-                                                                                                    </td>
-                                            </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
                                                                                                     </td>
                                             </tr>
                                                                                                                             <tr>
@@ -844,6 +1012,8 @@ and reload())</p></p>
                                                 <code>array|string</code><p><p>Where condition.</p></p>
                                             </div>
                                                                             
+                                                                            <h3>Response</h3>
+                                        <code>$this</code><p></p>
                                                                     </div>
                             </div>
 
@@ -1145,10 +1315,10 @@ and reload())</p></p>
                                                                             </div>
                                 </div>
                             </div>
-                                                    <a id="property___clearCountRedirects"> </a>
-                            <div class="element clickable property  private property___clearCountRedirects" data-toggle="collapse" data-target=".property___clearCountRedirects .collapse">
+                                                    <a id="property_clearCountRedirects"> </a>
+                            <div class="element clickable property  private property_clearCountRedirects" data-toggle="collapse" data-target=".property_clearCountRedirects .collapse">
                                 <h2>Clear redirects count.</h2>
-                                <pre>__clearCountRedirects : boolean</pre>
+                                <pre>clearCountRedirects : boolean</pre>
                                 <div class="labels">
                                                                                                         </div>
                                 <div class="row collapse">
@@ -1179,10 +1349,10 @@ and reload())</p></p>
                                                                             </div>
                                 </div>
                             </div>
-                                                    <a id="property___countRedirects"> </a>
-                            <div class="element clickable property  private property___countRedirects" data-toggle="collapse" data-target=".property___countRedirects .collapse">
+                                                    <a id="property_countRedirects"> </a>
+                            <div class="element clickable property  private property_countRedirects" data-toggle="collapse" data-target=".property_countRedirects .collapse">
                                 <h2>Current count redirects.</h2>
-                                <pre>__countRedirects : integer</pre>
+                                <pre>countRedirects : integer</pre>
                                 <div class="labels">
                                                                                                         </div>
                                 <div class="row collapse">
@@ -1233,7 +1403,7 @@ and reload())</p></p>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 03 Apr 2018 11:16:59 +0000.<br/>
+            generated on Fri, 17 Aug 2018 09:32:51 +0000.<br/>
     </footer>
     </body>
 </html>

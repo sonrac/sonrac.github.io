@@ -4,20 +4,28 @@ namespace sonrac\FCoverage;
 
 /**
  * Class BaseWebTest.
+ *
+ * Base class for web functional tests.
  */
 abstract class BaseWebTest extends OnceMigrationWebTest
 {
     use BootTraits, ControllersTestTrait;
 
     /**
+     * Http client object.
+     *
      * @var null|\Symfony\Component\HttpKernel\Client
      */
     protected $client;
     /**
+     * Response object.
+     *
      * @var null|\Symfony\Component\HttpFoundation\Response
      */
     protected $response;
     /**
+     * Crawler instance.
+     *
      * @var null|\Symfony\Component\DomCrawler\Crawler
      */
     protected $crawler;
@@ -31,7 +39,7 @@ abstract class BaseWebTest extends OnceMigrationWebTest
     {
         parent::setUp();
 
-        $this->client = null;
+        $this->client   = null;
         $this->response = null;
 
         $this->_boot();
@@ -60,7 +68,7 @@ abstract class BaseWebTest extends OnceMigrationWebTest
         $content = null,
         $changeHistory = true
     ) {
-        $this->client = $this->client ?: $this->createClient();
+        $this->client  = $this->client ?: $this->createClient();
         $this->crawler = $this->client->request(
             $method,
             $uri,
@@ -74,6 +82,18 @@ abstract class BaseWebTest extends OnceMigrationWebTest
         $this->response = $this->client->getResponse();
 
         return $this;
+    }
+
+    /**
+     * Set application.
+     *
+     * @param \Silex\Application $app
+     *
+     * @author Donii Sergii <doniysa@gmail.com>
+     */
+    public function setApplication($app)
+    {
+        $this->app = $app;
     }
 
     /**

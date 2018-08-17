@@ -1,10 +1,11 @@
 <?php
 /**
- * @author Donii Sergii <s.doniy@infomir.com>.
+ * @author Donii Sergii <doniysa@gmail.com>.
  */
 
 namespace sonrac\FCoverage;
 
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,8 @@ use Symfony\Component\Routing\RouteCompiler;
 
 /**
  * Class BaseControllerTest.
+ *
+ * Base controller test.
  *
  * @author Donii Sergii <doniysa@gmail.com>
  */
@@ -43,7 +46,7 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
      *
      * @author Donii Sergii <doniysa@gmail.com>
      */
-    protected $application;
+    protected $app;
 
     /**
      * Response object.
@@ -53,6 +56,15 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
      * @author Donii Sergii <doniysa@gmail.com>
      */
     protected $response;
+
+    /**
+     * Crawler.
+     *
+     * @var \Symfony\Component\DomCrawler\Crawler
+     *
+     * @author Donii Sergii <doniysa@gmail.com>
+     */
+    protected $crawler;
 
     /**
      * Origin server vars.
@@ -71,6 +83,18 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
     }
 
     /**
+     * Get crawler.
+     *
+     * @return \Symfony\Component\DomCrawler\Crawler
+     *
+     * @author Donii Sergii <doniysa@gmail.com>
+     */
+    public function getCrawler()
+    {
+        return $this->crawler;
+    }
+
+    /**
      * {@inheritdoc}
      *
      * @throws \Throwable
@@ -82,9 +106,10 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
         array $files = [],
         array $server = [],
         $content = null,
-        $changeHistory = true
+        $changeHistory = true,
+        $forward = false
     ) {
-        if ($this->isClearCountRedirects()) {
+        if ($this->isClearCountRedirects() && !$forward) {
             $this->setCountRedirects(0);
         }
 
@@ -93,7 +118,7 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
 
         // Parse get parameters
         $routeURL = parse_url($uri);
-        $query = !empty($routeURL['query']) ? $routeURL['query'] : [];
+        $query    = !empty($routeURL['query']) ? $routeURL['query'] : [];
 
         // Set server variables and fill $_POST/$_GET
         $body = $this->prepareParams($method, $parameters, $query);
@@ -127,6 +152,12 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
 
         $this->response = $this->getResponse($controller);
 
+        $this->crawler = new Crawler();
+
+        if ($this->response) {
+            $this->crawler->addHtmlContent($this->response->getContent());
+        }
+
         return $this;
     }
 
@@ -146,7 +177,7 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
         switch (strtolower($method)) {
             case 'post':
                 $_POST = array_merge($_POST, $data);
-                $get = [];
+                $get   = [];
                 if (is_string($query) && !empty($query)) {
                     parse_str($query, $get);
                 }
@@ -176,9 +207,9 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
      */
     protected function prepareServerVariables($options)
     {
-        $_SERVER['REQUEST_URI'] = $options['uri'];
+        $_SERVER['REQUEST_URI']    = $options['uri'];
         $_SERVER['REQUEST_METHOD'] = strtoupper($options['method']);
-        $_SERVER = array_merge($_SERVER, $options['server']);
+        $_SERVER                   = array_merge($_SERVER, $options['server']);
 
         if ($options['body']) {
             $this->request = Request::create(
@@ -211,12 +242,20 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
     protected function getControllerActionFromRouteConfig($method, $uri)
     {
         $method = strtoupper($method);
-        $index = $method.'_'.$this->shackCase($uri);
+        $index  = $method.'_'.$this->shackCase($uri);
         if (!$this->request) {
             $this->request = Request::createFromGlobals();
         }
-        $this->application = $this->getApplication();
-        $this->application->handle($this->request);
+        $this->setApplication($this->getApplication());
+        $response = $this->app->handle($this->request);
+
+        if ($response instanceof RedirectResponse) {
+            $response = $this->detectRedirectResponse($response);
+        }
+
+        if ($response instanceof Response) {
+            return $response;
+        }
 
         $response = $this->triggerKernelEvent(
             KernelEvents::REQUEST,
@@ -233,16 +272,16 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
         }
 
         /** @var \Silex\Route|null $route */
-        $route = $this->application['routes']->get($index);
+        $route = $this->app['routes']->get($index);
 
         if (!$route) { // Fix match route
             $index = str_replace($method, '', $index);
-            $route = $this->application['routes']->get($index);
+            $route = $this->app['routes']->get($index);
         }
 
         if (!$route) {
             /** @var \Symfony\Component\Routing\RouteCollection $routes */
-            $routes = $this->application['routes'];
+            $routes = $this->app['routes'];
             foreach ($routes as $_route) { // Find by path. Index not found
                 /** @var \Silex\Route $_route */
                 $compileRoute = RouteCompiler::compile($_route);
@@ -288,15 +327,27 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
     }
 
     /**
+     * Set application.
+     *
+     * @param \Silex\Application $app
+     *
+     * @author Donii Sergii <doniysa@gmail.com>
+     */
+    public function setApplication($app)
+    {
+        $this->app = $app;
+    }
+
+    /**
      * Get application.
      *
      * @return \Silex\Application
      *
-     * @author Donii Sergii <s.donii@infomir.com>
+     * @author Donii Sergii <doniysa@gmail.com>
      */
     public function getApplication()
     {
-        return $this->application ?: $this->application = $this->createApplication();
+        return $this->app ?: $this->app = $this->createApplication();
     }
 
     /**
@@ -330,9 +381,9 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
      */
     protected function triggerKernelEvent($eventName, $class = null)
     {
-        $this->application = $this->getApplication();
+        $this->setApplication($this->getApplication());
         /** @var \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher */
-        $dispatcher = $this->application['dispatcher'];
+        $dispatcher = $this->app['dispatcher'];
 
         /* Emulate request event for prepare middleware & other providers initialization */
         ob_start();
@@ -395,9 +446,11 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
         /* Resolve controller name */
         $controller = $controllerResolver->getController($this->request);
         /* Resolve arguments */
-        $this->application = $this->getApplication();
-        $argumentResolver = new ArgumentResolver($this->application['argument_metadata_factory'],
-            $this->application['argument_value_resolvers']);
+        $this->setApplication($this->getApplication());
+        $argumentResolver = new ArgumentResolver(
+            $this->app['argument_metadata_factory'],
+            $this->app['argument_value_resolvers']
+        );
         $arguments = $argumentResolver->getArguments($this->request, $controller);
 
         /* Call controller */
@@ -407,34 +460,7 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
             return $this->returnResponseFromHttpException($httpException);
         }
 
-        /* Allow redirect in unit tests */
-        if ($response instanceof RedirectResponse && $this->getAllowRedirect() !== false) {
-            $this->incrementCountRedirects();
-
-            if ($this->getCountRedirects() > $this->getAllowRedirect()) {
-                if ($this->isThrowExceptionOnRedirect() && ((int) $this->getAllowRedirect() !== 0)) {
-                    $exception = new MaxRedirectException();
-                    $exception->setCountRedirects($this->__countRedirects);
-
-                    throw $exception;
-                }
-
-                $this->response = $response;
-            } else {
-                $url = $response->getTargetUrl();
-                $headers = $response->headers->all();
-                $_SERVER = array_merge($this->originServerVars, $this->getPredefinedServerVars());
-
-                $_SERVER['REQUEST_URI'] = $url;
-
-                foreach ($headers as $header => $value) {
-                    $_SERVER['HTTP_'.strtoupper($header)] = $value;
-                }
-
-                $this->request('GET', $url, [], [], $_SERVER, $response->getContent(), true);
-                $response = $this->getResponseObject();
-            }
-        }
+        $response = $this->detectRedirectResponse($response);
 
         if ($response) {
             /* Trigger after middleware */
@@ -465,15 +491,59 @@ abstract class BaseControllerTest extends OnceMigrationUnitTest
     }
 
     /**
-     * Get response object.
+     * Detect redirect and redirect.
      *
-     * @return \Symfony\Component\HttpFoundation\Response|null
+     * @param \Symfony\Component\HttpFoundation\Response|string|null $response
+     *
+     * @throws \Throwable
+     * @throws \sonrac\FCoverage\MaxRedirectException
+     *
+     * @return null|\Symfony\Component\HttpFoundation\Response
      *
      * @author Donii Sergii <doniysa@gmail.com>
      */
-    public function getResponseObject()
+    protected function detectRedirectResponse($response)
     {
-        return $this->response;
+        /* Allow redirect in unit tests */
+        if ($response instanceof RedirectResponse && $this->getAllowRedirect() !== false) {
+            $this->incrementCountRedirects();
+
+            if ($this->getCountRedirects() > $this->getAllowRedirect()) {
+                if ($this->isThrowExceptionOnRedirect() && ((int) $this->getAllowRedirect() !== 0)) {
+                    $exception = new MaxRedirectException();
+                    $exception->setCountRedirects($this->countRedirects);
+
+                    throw $exception;
+                }
+
+                $this->response = $response;
+            } else {
+                $url     = $response->getTargetUrl();
+                $headers = $response->headers->all();
+                $_SERVER = array_merge($this->originServerVars, $this->getPredefinedServerVars());
+
+                $_SERVER['REQUEST_URI'] = $url;
+
+                foreach ($headers as $header => $value) {
+                    $_SERVER['HTTP_'.strtoupper($header)] = $value;
+                }
+
+                $this->request(
+                    'GET',
+                    $url,
+                    [],
+                    [],
+                    $_SERVER,
+                    $response->getContent(),
+                    true,
+                    true
+                );
+
+                return $this->getResponseObject();
+            }
+        }
+
+        return $response;
     }
 }
 

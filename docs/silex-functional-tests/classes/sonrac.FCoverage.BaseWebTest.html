@@ -119,7 +119,7 @@
         <li class="nav-header">
             <i class="icon-custom icon-method"></i> Methods
             <ul>
-                                                                                                                                                                                                                                                                            <li class="method public inherited">
+                                                                                                                                                                                                                                                                                                                                    <li class="method public inherited">
         <a href="#method_createApplication" title="createApplication :: {@inheritdoc}">
             <span class="description">{@inheritdoc}</span><pre>createApplication</pre>
         </a>
@@ -137,9 +137,15 @@
         </a>
     </li>
 
-                                                                                                        <li class="method public inherited">
+                                                                                                                                                                <li class="method public inherited">
         <a href="#method_getCountRedirects" title="getCountRedirects :: Get count redirects.">
             <span class="description">Get count redirects.</span><pre>getCountRedirects</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_getResponseObject" title="getResponseObject :: Get response object.">
+            <span class="description">Get response object.</span><pre>getResponseObject</pre>
         </a>
     </li>
 
@@ -167,9 +173,21 @@
         </a>
     </li>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <li class="method public inherited">
+                                                                                                                                                                                                                        <li class="method public inherited">
+        <a href="#method_seeCountInTable" title="seeCountInTable :: See in table count records.">
+            <span class="description">See in table count records.</span><pre>seeCountInTable</pre>
+        </a>
+    </li>
+
+                                                                                                                                                                                                                                                                                                                                        <li class="method public inherited">
         <a href="#method_setAllowRedirect" title="setAllowRedirect :: ">
             <span class="description"></span><pre>setAllowRedirect</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setApplication" title="setApplication :: Set application.">
+            <span class="description">Set application.</span><pre>setApplication</pre>
         </a>
     </li>
 
@@ -222,6 +240,11 @@
                                 <span class="description">Check method exists in trait and call it.</span><pre>checkTraits</pre>
                             </a>
                         </li>
+                                                                                <li class="method protected inherited">
+                            <a href="#method_clear" title="clear :: Clear global arrays.">
+                                <span class="description">Clear global arrays.</span><pre>clear</pre>
+                            </a>
+                        </li>
                                                                                                                     <li class="method protected inherited">
                             <a href="#method_delete" title="delete :: Calls a DELETE URI.">
                                 <span class="description">Calls a DELETE URI.</span><pre>delete</pre>
@@ -237,7 +260,12 @@
                                 <span class="description">Calls a GET URI.</span><pre>get</pre>
                             </a>
                         </li>
-                                                                                                                                                                                                                                <li class="method protected inherited">
+                                                                                                                                                        <li class="method protected inherited">
+                            <a href="#method_getConnection" title="getConnection :: Get database connection.">
+                                <span class="description">Get database connection.</span><pre>getConnection</pre>
+                            </a>
+                        </li>
+                                                                                                                                                                                            <li class="method protected inherited">
                             <a href="#method_initInitMigrationAppTrait" title="initInitMigrationAppTrait :: Init migration trait.">
                                 <span class="description">Init migration trait.</span><pre>initInitMigrationAppTrait</pre>
                             </a>
@@ -262,7 +290,7 @@
                                 <span class="description">Calls a URI.</span><pre>request</pre>
                             </a>
                         </li>
-                                                                                <li class="method protected inherited">
+                                                                                                                    <li class="method protected inherited">
                             <a href="#method_seeHeader" title="seeHeader :: See header in response.">
                                 <span class="description">See header in response.</span><pre>seeHeader</pre>
                             </a>
@@ -282,7 +310,7 @@
                                 <span class="description">See status code in response.</span><pre>seeStatusCode</pre>
                             </a>
                         </li>
-                                                                                                                                                                                                                                <li class="method protected">
+                                                                                                                                                                                                                                                                    <li class="method protected">
                             <a href="#method_setUp" title="setUp :: {@inheritdoc}">
                                 <span class="description">{@inheritdoc}</span><pre>setUp</pre>
                             </a>
@@ -296,7 +324,7 @@
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -317,7 +345,7 @@
                 <p class="short_description">Class BaseWebTest.</p>
                 <div class="details">
                     <div class="long_description">
-                        
+                        <p>Base class for web functional tests.</p>
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -473,6 +501,40 @@
                                                 <code>string</code><p><p>Method name prefix</p></p>
                                             </div>
                                                                             
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_clear"></a>
+                        <div class="element clickable method protected  method_clear inherited" data-toggle="collapse" data-target=".method_clear .collapse">
+                            <h2>Clear global arrays.</h2>
+                            <pre>clear() </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
                                                                     </div>
                             </div>
 
@@ -716,7 +778,7 @@ and reload())</p></p>
                                                 </th>
                                                 <td>
                                                                                                                                                                         
-                                                                                                                                                                        <p>Donii Sergii <a href="mailto:s.donii@infomir.com">s.donii@infomir.com</a></p>
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
                                                                                                     </td>
                                             </tr>
                                                                                     <tr>
@@ -731,6 +793,44 @@ and reload())</p></p>
                                     
                                                                             <h3>Response</h3>
                                         <code><a href="../classes/sonrac.FCoverage.TestApplication.html">\sonrac\FCoverage\TestApplication</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getConnection"></a>
+                        <div class="element clickable method protected  method_getConnection inherited" data-toggle="collapse" data-target=".method_getConnection .collapse">
+                            <h2>Get database connection.</h2>
+                            <pre>getConnection() : \Doctrine\DBAL\Connection</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    author
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Doctrine\DBAL\Connection</code><p></p>
                                                                     </div>
                             </div>
 
@@ -769,6 +869,44 @@ and reload())</p></p>
                                     
                                                                             <h3>Response</h3>
                                         <code>integer</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getResponseObject"></a>
+                        <div class="element clickable method public  method_getResponseObject inherited" data-toggle="collapse" data-target=".method_getResponseObject .collapse">
+                            <h2>Get response object.</h2>
+                            <pre>getResponseObject() : \Symfony\Component\HttpFoundation\Response|null</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    author
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Symfony\Component\HttpFoundation\Response|null</code><p></p>
                                                                     </div>
                             </div>
 
@@ -1059,7 +1197,7 @@ and reload())</p></p>
                                                 </th>
                                                 <td>
                                                                                                                                                                         
-                                                                                                                                                                        <p>Donii Sergii <a href="mailto:s.donii@infomir.com">s.donii@infomir.com</a></p>
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
                                                                                                     </td>
                                             </tr>
                                                                                     <tr>
@@ -1183,6 +1321,50 @@ and reload())</p></p>
                             </div>
 
                         </div>
+                                            <a id="method_seeCountInTable"></a>
+                        <div class="element clickable method public  method_seeCountInTable inherited" data-toggle="collapse" data-target=".method_seeCountInTable .collapse">
+                            <h2>See in table count records.</h2>
+                            <pre>seeCountInTable(string $table, integer $count, array|null $params = null) : $this</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    author
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$table</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$count</h4>
+                                                <code>integer</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$params</h4>
+                                                <code>array|null</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>$this</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                                             <a id="method_seeHeader"></a>
                         <div class="element clickable method protected  method_seeHeader inherited" data-toggle="collapse" data-target=".method_seeHeader .collapse">
                             <h2>See header in response.</h2>
@@ -1217,7 +1399,7 @@ and reload())</p></p>
                                             <a id="method_seeInDatabase"></a>
                         <div class="element clickable method protected  method_seeInDatabase inherited" data-toggle="collapse" data-target=".method_seeInDatabase .collapse">
                             <h2>See in database.</h2>
-                            <pre>seeInDatabase(string $table, array|string $condition) </pre>
+                            <pre>seeInDatabase(string $table, array|string $condition) : $this</pre>
                             <div class="labels">
                                 <span class="label">inherited</span>                                                                                                                                                            </div>
 
@@ -1234,13 +1416,6 @@ and reload())</p></p>
                                                 <td>
                                                                                                                                                                         
                                                                                                                                                                         <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
-                                                                                                    </td>
-                                            </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
                                                                                                     </td>
                                             </tr>
                                                                                                                             <tr>
@@ -1264,6 +1439,8 @@ and reload())</p></p>
                                                 <code>array|string</code><p><p>Where condition.</p></p>
                                             </div>
                                                                             
+                                                                            <h3>Response</h3>
+                                        <code>$this</code><p></p>
                                                                     </div>
                             </div>
 
@@ -1370,6 +1547,47 @@ and reload())</p></p>
                                                                                     <div class="subelement argument">
                                                 <h4>$allowRedirect</h4>
                                                 <code>boolean|integer</code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setApplication"></a>
+                        <div class="element clickable method public  method_setApplication" data-toggle="collapse" data-target=".method_setApplication .collapse">
+                            <h2>Set application.</h2>
+                            <pre>setApplication(\Silex\Application $app) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    author
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>Donii Sergii <a href="mailto:doniysa@gmail.com">doniysa@gmail.com</a></p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$app</h4>
+                                                <code>\Silex\Application</code><p></p>
                                             </div>
                                                                             
                                                                     </div>
@@ -1671,7 +1889,7 @@ and reload())</p></p>
                                                                 <h3><i class="icon-custom icon-property"></i> Properties</h3>
                                                     <a id="property_client"> </a>
                             <div class="element clickable property  protected property_client" data-toggle="collapse" data-target=".property_client .collapse">
-                                <h2>client</h2>
+                                <h2>Http client object.</h2>
                                 <pre>client : null|\Symfony\Component\HttpKernel\Client</pre>
                                 <div class="labels">
                                                                                                         </div>
@@ -1697,7 +1915,7 @@ and reload())</p></p>
                             </div>
                                                     <a id="property_response"> </a>
                             <div class="element clickable property  protected property_response" data-toggle="collapse" data-target=".property_response .collapse">
-                                <h2>response</h2>
+                                <h2>Response object.</h2>
                                 <pre>response : null|\Symfony\Component\HttpFoundation\Response</pre>
                                 <div class="labels">
                                                                                                         </div>
@@ -1723,7 +1941,7 @@ and reload())</p></p>
                             </div>
                                                     <a id="property_crawler"> </a>
                             <div class="element clickable property  protected property_crawler" data-toggle="collapse" data-target=".property_crawler .collapse">
-                                <h2>crawler</h2>
+                                <h2>Crawler instance.</h2>
                                 <pre>crawler : null|\Symfony\Component\DomCrawler\Crawler</pre>
                                 <div class="labels">
                                                                                                         </div>
@@ -1815,10 +2033,10 @@ and reload())</p></p>
                                                                             </div>
                                 </div>
                             </div>
-                                                    <a id="property___clearCountRedirects"> </a>
-                            <div class="element clickable property  private property___clearCountRedirects inherited" data-toggle="collapse" data-target=".property___clearCountRedirects .collapse">
+                                                    <a id="property_clearCountRedirects"> </a>
+                            <div class="element clickable property  private property_clearCountRedirects inherited" data-toggle="collapse" data-target=".property_clearCountRedirects .collapse">
                                 <h2>Clear redirects count.</h2>
-                                <pre>__clearCountRedirects : boolean</pre>
+                                <pre>clearCountRedirects : boolean</pre>
                                 <div class="labels">
                                     <span class="label">inherited</span>                                                                    </div>
                                 <div class="row collapse">
@@ -1849,10 +2067,10 @@ and reload())</p></p>
                                                                             </div>
                                 </div>
                             </div>
-                                                    <a id="property___countRedirects"> </a>
-                            <div class="element clickable property  private property___countRedirects inherited" data-toggle="collapse" data-target=".property___countRedirects .collapse">
+                                                    <a id="property_countRedirects"> </a>
+                            <div class="element clickable property  private property_countRedirects inherited" data-toggle="collapse" data-target=".property_countRedirects .collapse">
                                 <h2>Current count redirects.</h2>
-                                <pre>__countRedirects : integer</pre>
+                                <pre>countRedirects : integer</pre>
                                 <div class="labels">
                                     <span class="label">inherited</span>                                                                    </div>
                                 <div class="row collapse">
@@ -1971,7 +2189,7 @@ and reload())</p></p>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 03 Apr 2018 11:16:59 +0000.<br/>
+            generated on Fri, 17 Aug 2018 09:32:51 +0000.<br/>
     </footer>
     </body>
 </html>

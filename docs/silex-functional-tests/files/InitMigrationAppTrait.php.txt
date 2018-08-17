@@ -1,15 +1,16 @@
 <?php
 /**
- * @author Donii Sergii <s.doniy@infomir.com>.
+ * @author Donii Sergii <doniysa@gmail.com>.
  */
 
 namespace sonrac\FCoverage;
 
 /**
- * Trait InitMigrationAppTrait
+ * Trait InitMigrationAppTrait.
+ *
  * Run migrations with seeds trait.
  *
- * @author Donii Sergii <s.donii@infomir.com>
+ * @author Donii Sergii <doniysa@gmail.com>
  */
 trait InitMigrationAppTrait
 {
@@ -20,7 +21,7 @@ trait InitMigrationAppTrait
      *
      * @author Donii Sergii <doniysa@gmail.com>
      */
-    protected static $runMigration = true;
+    protected static $runMigration = false;
 
     /**
      * Seeds list.
@@ -40,17 +41,22 @@ trait InitMigrationAppTrait
      */
     protected static function initInitMigrationAppTrait()
     {
+        $instance = new static();
+        $class    = $instance->getAppClass();
+        $class::newInstance()
+            ->setRunMigration(static::$runMigration)
+            ->getMigration()
+            ->setSeeds($instance::$seeds);
+        static::prepareMigrations();
+
         if (true === static::$runMigration) {
-            $instance = new static();
-            $class = $instance->getAppClass();
-            $class::newInstance()
-                ->setRunMigration(static::$runMigration)
-                ->getMigration()
-                ->setSeeds($instance::$seeds);
-            static::prepareMigrations();
             $class::getInstance()
                 ->runMigration();
         }
+
+        $class::getInstance()
+            ->getMigration()
+            ->runSeeds();
     }
 
     /**
@@ -58,14 +64,14 @@ trait InitMigrationAppTrait
      *
      * @return \sonrac\FCoverage\TestApplication
      *
-     * @author Donii Sergii <s.donii@infomir.com>
+     * @author Donii Sergii <doniysa@gmail.com>
      */
     abstract public function getAppClass();
 
     /**
      * Prepare migrations before run.
      *
-     * @author Donii Sergii <s.donii@infomir.com>
+     * @author Donii Sergii <doniysa@gmail.com>
      */
     public static function prepareMigrations()
     {

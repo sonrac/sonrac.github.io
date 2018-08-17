@@ -139,11 +139,20 @@ trait MigrationsTrait
      */
     public function bootMigrationsTrait()
     {
-        $this->runCommand($this->getMigrationCommand());
+        $this->runMigration();
+        $this->runSeeds();
+    }
 
-        foreach ($this->getSeeds() as $seed) {
-            $this->runSeed($seed);
-        }
+    /**
+     * Run migrations.
+     *
+     * @throws \Exception
+     *
+     * @author Donii Sergii <doniysa@gmail.com>
+     */
+    public function runMigration()
+    {
+        $this->runCommand($this->getMigrationCommand());
     }
 
     /**
@@ -156,16 +165,18 @@ trait MigrationsTrait
     private function runCommand($command)
     {
         $command = PHP_EOL.$this->getPreCommand().
-                   "; cd {$this->getBinDir()}; {$this->getPhpExecutor()} {$this->getConsoleCommand()} {$command}".PHP_EOL;
+            "; cd {$this->getBinDir()}; {$this->getPhpExecutor()} {$this->getConsoleCommand()} {$command}"
+            .PHP_EOL;
 
         ob_start();
-        exec($command, $out, $code);
+        $first   = exec($command, $out, $code);
+        $content = ob_get_contents();
         ob_end_clean();
 
         if ((int) $code !== 0 && !$this->continueOnFailure) {
             throw new \Exception(
                 "Command \n {$command} \n run with code {$code} with out: \n ".
-                implode(PHP_EOL, $out)
+                $first.' '.$content.PHP_EOL.implode(PHP_EOL, $out)
             );
         }
     }
@@ -311,6 +322,20 @@ trait MigrationsTrait
     }
 
     /**
+     * Run seeds.
+     *
+     * @throws \Exception
+     *
+     * @author Donii Sergii <doniysa@gmail.com>
+     */
+    public function runSeeds()
+    {
+        foreach ($this->getSeeds() as $seed) {
+            $this->runSeed($seed);
+        }
+    }
+
+    /**
      * Get seeds.
      *
      * @return array
@@ -337,8 +362,8 @@ trait MigrationsTrait
      */
     protected function runSeed($seed)
     {
-        $class = class_exists($seed) ? $seed : $this->getSeedNamespace().ucfirst($seed).
-                                               ($this->seedClassEnding ?: '');
+        $class = class_exists($seed) ? str_replace('\\', '\\\\', $seed)
+            : $this->getSeedNamespace().ucfirst($seed).($this->seedClassEnding ?: '');
         $this->runCommand($this->getSeedCommand().$class);
     }
 
@@ -545,7 +570,7 @@ trait MigrationsTrait
          * @var \Doctrine\DBAL\Connection
          */
         $connection = $this->app['db'];
-        $builder = $connection->createQueryBuilder();
+        $builder    = $connection->createQueryBuilder();
 
         $migrations = $builder->select(['version'])
             ->from('migration_versions')
