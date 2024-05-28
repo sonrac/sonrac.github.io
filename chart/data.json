@@ -1,4 +1,6 @@
-[
+{
+    "name": "ECLASS",
+    "children": [
         {
             "name": "Nicht Identifiziert ECLASS 1",
             "level": 1,
@@ -25732,4 +25734,5 @@
                 "eclass_4_name": null
             }
         }
-]
+    ]
+}
